@@ -1,5 +1,4 @@
 import { Component, computed, inject } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
 import { MenuStateService } from '../../../core/services/menu-state.service';
 import { SelectedItemRowComponent } from '../selected-item-row/selected-item-row.component';
 import { PanelCardComponent } from '../../../shared/ui/panel-card/panel-card.component';
@@ -8,7 +7,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
 @Component({
   selector: 'app-selected-menu',
   standalone: true,
-  imports: [NgIf, NgForOf, PanelCardComponent, SelectedItemRowComponent, EmptyStateComponent],
+  imports: [PanelCardComponent, SelectedItemRowComponent, EmptyStateComponent],
   templateUrl: './selected-menu.component.html',
   styleUrl: './selected-menu.component.css'
 })

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, computed, inject, signal } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
 import { CategoryNodeComponent } from './category-node/category-node.component';
 import { MenuApiService } from '../../../core/services/menu-api.service';
 import { MenuGroup } from '../../../model/menu.models';
@@ -7,7 +6,7 @@ import { MenuGroup } from '../../../model/menu.models';
 @Component({
   selector: 'app-category-tree',
   standalone: true,
-  imports: [NgIf, NgForOf, CategoryNodeComponent],
+  imports: [CategoryNodeComponent],
   templateUrl: './category-tree.component.html',
   styleUrl: './category-tree.component.css'
 })

@@ -1,23 +1,27 @@
 <div class="analysis-tables">
-  <section *ngFor="let group of groups" class="analysis-table">
-    <h3 class="analysis-table__title">{{ group.groupName }}</h3>
-    <table class="table table-sm mb-0">
-      <thead>
-        <tr>
-          <th>Блюдо</th>
-          <th class="text-center">Кол-во</th>
-          <th class="text-end">Цена</th>
-          <th class="text-end">Вес</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of group.items">
-          <td>{{ item.name }}</td>
-          <td class="text-center">{{ item.quantity }}</td>
-          <td class="text-end">{{ item.price }}</td>
-          <td class="text-end">{{ item.weight }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  @for (group of groups; track group.groupName) {
+    <section class="analysis-table">
+      <h3 class="analysis-table__title">{{ group.groupName }}</h3>
+      <table class="table table-sm mb-0">
+        <thead>
+          <tr>
+            <th>Блюдо</th>
+            <th class="text-center">Кол-во</th>
+            <th class="text-end">Цена</th>
+            <th class="text-end">Вес</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of group.items; track item.name) {
+            <tr>
+              <td>{{ item.name }}</td>
+              <td class="text-center">{{ item.quantity }}</td>
+              <td class="text-end">{{ item.price }}</td>
+              <td class="text-end">{{ item.weight }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  }
 </div>

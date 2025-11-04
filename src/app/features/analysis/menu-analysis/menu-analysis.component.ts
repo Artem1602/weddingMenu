@@ -1,6 +1,4 @@
-import { Component, computed } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MenuStateService } from '../../../core/services/menu-state.service';
 import { AnalysisTablesComponent } from '../analysis-tables/analysis-tables.component';
 import { PanelCardComponent } from '../../../shared/ui/panel-card/panel-card.component';
@@ -9,7 +7,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
 @Component({
   selector: 'app-menu-analysis',
   standalone: true,
-  imports: [NgIf, PanelCardComponent, EmptyStateComponent, AnalysisTablesComponent],
+  imports: [PanelCardComponent, EmptyStateComponent, AnalysisTablesComponent],
   templateUrl: './menu-analysis.component.html',
   styleUrl: './menu-analysis.component.css'
 })

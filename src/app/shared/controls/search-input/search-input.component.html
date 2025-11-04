@@ -1,5 +1,7 @@
 <label class="search-input">
-  <span class="search-input__label" *ngIf="label">{{ label }}</span>
+  @if (label) {
+    <span class="search-input__label">{{ label }}</span>
+  }
   <div class="search-input__wrapper">
     <input
       #searchInput
@@ -9,13 +11,14 @@
       [value]="value"
       (input)="onInput(searchInput.value)"
     />
-    <button
-      type="button"
-      class="btn btn-link btn-sm"
-      *ngIf="value"
-      (click)="clear()"
-    >
-      ????????
-    </button>
+    @if (value) {
+      <button
+        type="button"
+        class="btn btn-link btn-sm"
+        (click)="clear()"
+      >
+        ????????
+      </button>
+    }
   </div>
 </label>

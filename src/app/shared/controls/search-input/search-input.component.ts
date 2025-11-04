@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-search-input',
   standalone: true,
-  imports: [NgIf],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.css'
 })

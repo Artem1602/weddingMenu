@@ -3,10 +3,12 @@
     <header appPanelCardHeader>
       <div class="menu-analysis__header">
         <h2>Анализ меню</h2>
-        <div class="menu-analysis__summary" *ngIf="hasSelection()">
-          <span>Категорий: {{ totalGroups() }}</span>
-          <span>Позиции суммарно: {{ totalQuantity() }}</span>
-        </div>
+        @if (hasSelection()) {
+          <div class="menu-analysis__summary">
+            <span>Категорий: {{ totalGroups() }}</span>
+            <span>Позиции суммарно: {{ totalQuantity() }}</span>
+          </div>
+        }
       </div>
       <div class="menu-analysis__actions">
         <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="!hasSelection()">
@@ -18,12 +20,10 @@
       </div>
     </header>
 
-    <ng-container *ngIf="hasSelection(); else emptyState">
+    @if (hasSelection()) {
       <app-analysis-tables [groups]="groupedItems()" />
-    </ng-container>
+    } @else {
+      <app-empty-state message="Выберите блюда, чтобы посмотреть анализ." />
+    }
   </app-panel-card>
 </section>
-
-<ng-template #emptyState>
-  <app-empty-state message="Выберите блюда, чтобы посмотреть анализ." />
-</ng-template>
