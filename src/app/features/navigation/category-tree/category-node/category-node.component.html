@@ -1,27 +1,42 @@
 <app-panel-card>
-  <header appPanelCardHeader>
-    <h3>{{ group.name }}</h3>
+  <header appPanelCardHeader class="category-node__header">
+    <h3 class="category-node__title">{{ group.name }}</h3>
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-sm category-node__toggle"
+      (click)="toggleCollapsed()"
+      [attr.aria-label]="isCollapsed() ? 'Развернуть раздел' : 'Свернуть раздел'"
+    >
+      <i
+        class="bi"
+        [class.bi-chevron-down]="!isCollapsed()"
+        [class.bi-chevron-right]="isCollapsed()"
+        aria-hidden="true"
+      ></i>
+    </button>
   </header>
 
-  <ul class="category-node__list">
-    @for (item of group.items; track item.name) {
-      <li class="category-node__item">
-        <div class="category-node__info">
-          <span class="category-node__name">{{ item.name }}</span>
-          <span class="category-node__meta">
-            <span>{{ item.price }}</span>
-            <span class="category-node__divider">•</span>
-            <span>{{ item.weight }}</span>
-          </span>
-        </div>
+  @if (!isCollapsed()) {
+    <ul class="category-node__list">
+      @for (item of group.items; track item.name) {
+        <li class="category-node__item">
+          <div class="category-node__info">
+            <span class="category-node__name">{{ item.name }}</span>
+            <span class="category-node__meta">
+              <span>{{ item.price }}</span>
+              <span class="category-node__divider">•</span>
+              <span>{{ item.weight }}</span>
+            </span>
+          </div>
 
-        <app-quantity-stepper
-          [value]="quantityFor(item)"
-          (increment)="increment(item)"
-          (decrement)="decrement(item)"
-          (valueChange)="updateQuantity(item, $event)"
-        />
-      </li>
-    }
-  </ul>
+          <app-quantity-stepper
+            [value]="quantityFor(item)"
+            (increment)="increment(item)"
+            (decrement)="decrement(item)"
+            (valueChange)="updateQuantity(item, $event)"
+          />
+        </li>
+      }
+    </ul>
+  }
 </app-panel-card>
