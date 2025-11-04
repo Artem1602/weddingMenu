@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import { MenuGroup, MenuItem } from '../../../../model/menu.models';
 import { QuantityStepperComponent } from '../../../../shared/controls/quantity-stepper/quantity-stepper.component';
 import { MenuStateService } from '../../../../core/services/menu-state.service';
@@ -13,6 +13,7 @@ import { PanelCardComponent } from '../../../../shared/ui/panel-card/panel-card.
 })
 export class CategoryNodeComponent {
   @Input({ required: true }) group!: MenuGroup;
+  private readonly collapsed = signal(true);
 
   constructor(private readonly menuState: MenuStateService) {}
 
@@ -31,4 +32,13 @@ export class CategoryNodeComponent {
   protected updateQuantity(item: MenuItem, quantity: number): void {
     this.menuState.setQuantity(this.group.name, item, quantity);
   }
+
+  protected toggleCollapsed(): void {
+    this.collapsed.update((value) => !value);
+  }
+
+  protected isCollapsed(): boolean {
+    return this.collapsed();
+  }
+
 }

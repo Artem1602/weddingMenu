@@ -3,11 +3,12 @@ import { MenuStateService } from '../../../core/services/menu-state.service';
 import { SelectedItemRowComponent } from '../selected-item-row/selected-item-row.component';
 import { PanelCardComponent } from '../../../shared/ui/panel-card/panel-card.component';
 import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.component';
+import {MenuAnalysisComponent} from '../../analysis/menu-analysis/menu-analysis.component';
 
 @Component({
   selector: 'app-selected-menu',
   standalone: true,
-  imports: [PanelCardComponent, SelectedItemRowComponent, EmptyStateComponent],
+  imports: [PanelCardComponent, SelectedItemRowComponent, EmptyStateComponent, MenuAnalysisComponent],
   templateUrl: './selected-menu.component.html',
   styleUrl: './selected-menu.component.css'
 })
