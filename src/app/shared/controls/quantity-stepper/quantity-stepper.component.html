@@ -1,0 +1,28 @@
+<div class="quantity-stepper">
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-sm"
+    (click)="onDecrement()"
+    [disabled]="value <= min"
+  >
+    -
+  </button>
+  <input
+    #inputEl
+    type="number"
+    class="form-control form-control-sm quantity-stepper__input"
+    [value]="value"
+    (input)="onInput(inputEl.value)"
+    [min]="min"
+    [max]="max ?? undefined"
+    [step]="step"
+  />
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-sm"
+    (click)="onIncrement()"
+    [disabled]="max !== null && value >= max"
+  >
+    +
+  </button>
+</div>

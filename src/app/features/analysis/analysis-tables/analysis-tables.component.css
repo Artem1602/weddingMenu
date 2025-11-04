@@ -1,0 +1,9 @@
+.analysis-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.analysis-table__title {
+  margin-bottom: 0.75rem;
+}

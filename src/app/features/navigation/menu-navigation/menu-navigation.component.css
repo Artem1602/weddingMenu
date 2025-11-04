@@ -1,0 +1,13 @@
+.menu-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-navigation__header {
+  position: sticky;
+  top: 0;
+  padding: 0.5rem 0;
+  background: inherit;
+  z-index: 1;
+}

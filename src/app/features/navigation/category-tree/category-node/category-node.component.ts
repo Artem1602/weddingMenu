@@ -1,0 +1,36 @@
+import { Component, Input } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { MenuGroup, MenuItem } from '../../../../model/menu.models';
+import { QuantityStepperComponent } from '../../../../shared/controls/quantity-stepper/quantity-stepper.component';
+import { MenuStateService } from '../../../../core/services/menu-state.service';
+import { PanelCardComponent } from '../../../../shared/ui/panel-card/panel-card.component';
+
+@Component({
+  selector: 'app-category-node',
+  standalone: true,
+  imports: [PanelCardComponent, QuantityStepperComponent, NgForOf],
+  templateUrl: './category-node.component.html',
+  styleUrl: './category-node.component.css'
+})
+export class CategoryNodeComponent {
+  @Input({ required: true }) group!: MenuGroup;
+
+  constructor(private readonly menuState: MenuStateService) {}
+
+  protected quantityFor(item: MenuItem): number {
+    return this.menuState.quantityFor(this.group.name, item.name);
+  }
+
+  protected increment(item: MenuItem): void {
+    this.menuState.addOrIncrement(this.group.name, item);
+  }
+
+  protected decrement(item: MenuItem): void {
+    this.menuState.decrement(this.group.name, item.name);
+  }
+
+  protected updateQuantity(item: MenuItem, quantity: number): void {
+    this.menuState.setQuantity(this.group.name, item, quantity);
+  }
+}
+

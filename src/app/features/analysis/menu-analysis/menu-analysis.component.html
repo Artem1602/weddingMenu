@@ -1,0 +1,29 @@
+<section class="menu-analysis">
+  <app-panel-card>
+    <header appPanelCardHeader>
+      <div class="menu-analysis__header">
+        <h2>Анализ меню</h2>
+        <div class="menu-analysis__summary" *ngIf="hasSelection()">
+          <span>Категорий: {{ totalGroups() }}</span>
+          <span>Позиции суммарно: {{ totalQuantity() }}</span>
+        </div>
+      </div>
+      <div class="menu-analysis__actions">
+        <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="!hasSelection()">
+          Сохранить
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="!hasSelection()">
+          Скачать PDF
+        </button>
+      </div>
+    </header>
+
+    <ng-container *ngIf="hasSelection(); else emptyState">
+      <app-analysis-tables [groups]="groupedItems()" />
+    </ng-container>
+  </app-panel-card>
+</section>
+
+<ng-template #emptyState>
+  <app-empty-state message="Выберите блюда, чтобы посмотреть анализ." />
+</ng-template>

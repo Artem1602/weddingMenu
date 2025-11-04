@@ -1,0 +1,25 @@
+<app-panel-card>
+  <header appPanelCardHeader>
+    <h3>{{ group.name }}</h3>
+  </header>
+
+  <ul class="category-node__list">
+    <li *ngFor="let item of group.items" class="category-node__item">
+      <div class="category-node__info">
+        <span class="category-node__name">{{ item.name }}</span>
+        <span class="category-node__meta">
+          <span>{{ item.price }}</span>
+          <span class="category-node__divider">•</span>
+          <span>{{ item.weight }}</span>
+        </span>
+      </div>
+
+      <app-quantity-stepper
+        [value]="quantityFor(item)"
+        (increment)="increment(item)"
+        (decrement)="decrement(item)"
+        (valueChange)="updateQuantity(item, $event)"
+      />
+    </li>
+  </ul>
+</app-panel-card>

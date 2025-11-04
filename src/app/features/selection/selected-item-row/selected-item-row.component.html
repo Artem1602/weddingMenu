@@ -1,0 +1,22 @@
+<article class="selected-item">
+  <div class="selected-item__info">
+    <span class="selected-item__name">{{ item.name }}</span>
+    <span class="selected-item__meta">
+      <span>{{ item.price }}</span>
+      <span class="selected-item__divider">•</span>
+      <span>{{ item.weight }}</span>
+    </span>
+  </div>
+
+  <div class="selected-item__controls">
+    <app-quantity-stepper
+      [value]="item.quantity"
+      (increment)="increment()"
+      (decrement)="decrement()"
+      (valueChange)="update($event)"
+    />
+    <button type="button" class="btn btn-link btn-sm text-danger" (click)="remove()">
+      Удалить
+    </button>
+  </div>
+</article>

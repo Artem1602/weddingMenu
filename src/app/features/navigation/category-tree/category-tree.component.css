@@ -1,0 +1,20 @@
+.category-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.category-tree__status {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.category-tree__status--error {
+  color: #dc3545;
+}
+
+.category-tree__status--empty {
+  color: #6c757d;
+  font-style: italic;
+}

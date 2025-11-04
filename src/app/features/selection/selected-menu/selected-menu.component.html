@@ -1,0 +1,34 @@
+<section class="selected-menu">
+  <app-panel-card>
+    <header appPanelCardHeader>
+      <div class="selected-menu__header">
+        <h2>Выбранное меню</h2>
+        <span class="selected-menu__counter" *ngIf="hasItems()">
+          Всего позиций: {{ totalQuantity() }}
+        </span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-link btn-sm"
+        (click)="clear()"
+        [disabled]="!hasItems()"
+      >
+        Очистить выбор
+      </button>
+    </header>
+
+    <ng-container *ngIf="hasItems(); else emptyState">
+      <section *ngFor="let group of groupedItems()" class="selected-menu__group">
+        <h3 class="selected-menu__group-title">{{ group.groupName }}</h3>
+        <app-selected-item-row
+          *ngFor="let item of group.items"
+          [item]="item"
+        />
+      </section>
+    </ng-container>
+  </app-panel-card>
+</section>
+
+<ng-template #emptyState>
+  <app-empty-state message="Вы пока ничего не выбрали." />
+</ng-template>

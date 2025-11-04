@@ -1,0 +1,38 @@
+import { Injectable, computed, signal } from '@angular/core';
+import {WeddingMenu} from '../../model/menu.models';
+
+@Injectable({ providedIn: 'root' })
+export class MenuApiService {
+  private readonly _menu = signal<WeddingMenu | null>(null);
+  private readonly _loading = signal<boolean>(false);
+  private readonly _error = signal<string | null>(null);
+
+  readonly menu = this._menu.asReadonly();
+  readonly loading = this._loading.asReadonly();
+  readonly error = this._error.asReadonly();
+
+  readonly meta = computed(() => this._menu()?.meta ?? null);
+  readonly groups = computed(() => this._menu()?.groups ?? []);
+
+  /**
+   * Loads the wedding menu JSON from a public asset.
+   * Place the file at `/wedding_menu_full.json` (public root) or pass a custom URL.
+   */
+  async load(url: string = '/wedding_menu_full.json'): Promise<void> {
+    if (this._menu()) return; // cache: load once
+    this._loading.set(true);
+    this._error.set(null);
+    try {
+      const res = await fetch(url, { cache: 'force-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = (await res.json()) as WeddingMenu;
+      this._menu.set(data);
+    } catch (e: any) {
+      this._error.set(e?.message ?? 'Failed to load menu');
+      this._menu.set(null);
+    } finally {
+      this._loading.set(false);
+    }
+  }
+}
+

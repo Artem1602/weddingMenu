@@ -1,0 +1,21 @@
+<label class="search-input">
+  <span class="search-input__label" *ngIf="label">{{ label }}</span>
+  <div class="search-input__wrapper">
+    <input
+      #searchInput
+      type="search"
+      class="form-control form-control-sm"
+      [placeholder]="placeholder"
+      [value]="value"
+      (input)="onInput(searchInput.value)"
+    />
+    <button
+      type="button"
+      class="btn btn-link btn-sm"
+      *ngIf="value"
+      (click)="clear()"
+    >
+      ????????
+    </button>
+  </div>
+</label>

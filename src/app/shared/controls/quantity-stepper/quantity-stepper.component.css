@@ -1,0 +1,10 @@
+.quantity-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.quantity-stepper__input {
+  width: 4rem;
+  text-align: center;
+}

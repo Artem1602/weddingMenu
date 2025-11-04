@@ -1,0 +1,12 @@
+<section class="menu-navigation">
+  <header class="menu-navigation__header">
+    <app-search-input
+      label="Поиск блюд"
+      placeholder="Введите название..."
+      [value]="filter()"
+      (valueChange)="onFilterChange($event)"
+    />
+  </header>
+
+  <app-category-tree [filter]="filter()" />
+</section>

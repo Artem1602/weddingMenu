@@ -1,0 +1,17 @@
+<div class="category-tree">
+  <p *ngIf="loading() && !filteredGroups().length" class="category-tree__status">Загрузка меню...</p>
+  <p *ngIf="error()" class="category-tree__status category-tree__status--error">
+    Ошибка загрузки: {{ error() }}
+  </p>
+
+  <ng-container *ngIf="filteredGroups().length; else emptyState">
+    <app-category-node
+      *ngFor="let group of filteredGroups(); trackBy: trackGroup"
+      [group]="group"
+    />
+  </ng-container>
+</div>
+
+<ng-template #emptyState>
+  <p class="category-tree__status category-tree__status--empty">Нет блюд по заданному фильтру.</p>
+</ng-template>
