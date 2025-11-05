@@ -1,12 +1,25 @@
-<section class="menu-navigation">
-  <header class="menu-navigation__header">
-    <app-search-input
-      label="Поиск блюд"
-      placeholder="Введите название..."
-      [value]="filter()"
-      (valueChange)="onFilterChange($event)"
-    />
-  </header>
+﻿<section class="menu-navigation">
+  <div class="menu-navigation__header">
+    <app-panel-card>
+      <app-search-input
+        label="Пошук страв"
+        placeholder="Введіть значення..."
+        [value]="filter()"
+        (valueChange)="onFilterChange($event)"
+      />
+    </app-panel-card>
 
-  <app-category-tree [filter]="filter()" />
+    <app-panel-card class="menu-navigation__actions">
+      <div class="menu-navigation__actions-row">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onExpandAll()">
+          Розгорнути все
+        </button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="onCollapseAll()">
+          Згорнути все
+        </button>
+      </div>
+    </app-panel-card>
+  </div>
+
+  <app-category-tree [filter]="filter()"/>
 </section>

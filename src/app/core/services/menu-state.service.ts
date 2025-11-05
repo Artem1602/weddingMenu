@@ -1,5 +1,6 @@
-import { Injectable, computed, signal } from '@angular/core';
-import { MenuItem } from '../../model/menu.models';
+import {Injectable, computed, signal} from '@angular/core';
+import {MenuItem} from '../../model/menu.models';
+import {parsePrice, parseWeight} from './functions.util';
 
 export interface SelectedMenuItem extends MenuItem {
   groupName: string;
@@ -11,13 +12,19 @@ export interface SelectedGroup {
   items: SelectedMenuItem[];
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class MenuStateService {
   private readonly _items = signal<SelectedMenuItem[]>([]);
 
   readonly items = this._items.asReadonly();
   readonly totalQuantity = computed(() =>
     this._items().reduce((total, item) => total + item.quantity, 0)
+  );
+  readonly totalPrice = computed(() =>
+    this._items().reduce((total, item) => total + parsePrice(item.price) * item.quantity, 0)
+  );
+  readonly totalWeight = computed(() =>
+    this._items().reduce((total, item) => total + parseWeight(item.weight) * item.quantity, 0)
   );
   readonly totalGroups = computed(() => new Set(this._items().map((item) => item.groupName)).size);
   readonly groupedItems = computed<SelectedGroup[]>(() => {
@@ -45,9 +52,9 @@ export class MenuStateService {
     const key = this.composeKey(groupName, item.name);
     const index = next.findIndex((i) => this.composeKey(i.groupName, i.name) === key);
     if (index === -1) {
-      next.push({ ...item, groupName, quantity: Math.max(step, 1) });
+      next.push({...item, groupName, quantity: Math.max(step, 1)});
     } else {
-      next[index] = { ...next[index], quantity: next[index].quantity + step };
+      next[index] = {...next[index], quantity: next[index].quantity + step};
     }
     this._items.set(this.normalize(next));
   }
@@ -57,7 +64,7 @@ export class MenuStateService {
     const next = this._items()
       .map((item) =>
         this.composeKey(item.groupName, item.name) === key
-          ? { ...item, quantity: item.quantity - step }
+          ? {...item, quantity: item.quantity - step}
           : item
       )
       .filter((item) => item.quantity > 0);
@@ -73,9 +80,9 @@ export class MenuStateService {
     const key = this.composeKey(groupName, item.name);
     const index = next.findIndex((i) => this.composeKey(i.groupName, i.name) === key);
     if (index === -1) {
-      next.push({ ...item, groupName, quantity });
+      next.push({...item, groupName, quantity});
     } else {
-      next[index] = { ...next[index], quantity };
+      next[index] = {...next[index], quantity};
     }
     this._items.set(this.normalize(next));
   }

@@ -2,20 +2,20 @@
   <app-panel-card>
     <header appPanelCardHeader>
       <div class="menu-analysis__header">
-        <h2>Анализ меню</h2>
+        <h2>Аналіз меню</h2>
         @if (hasSelection()) {
           <div class="menu-analysis__summary">
-            <span>Категорий: {{ totalGroups() }}</span>
-            <span>Позиции суммарно: {{ totalQuantity() }}</span>
+            <span>Категорій: {{ totalGroups() }}</span>
+            <span>Позицій разом: {{ totalQuantity() }}</span>
           </div>
         }
       </div>
       <div class="menu-analysis__actions">
         <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="!hasSelection()">
-          Сохранить
+          Зберегти
         </button>
         <button type="button" class="btn btn-primary btn-sm" [disabled]="!hasSelection()">
-          Скачать PDF
+          Завантажити PDF
         </button>
       </div>
     </header>

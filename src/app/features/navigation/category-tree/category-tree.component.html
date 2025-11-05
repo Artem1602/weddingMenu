@@ -1,19 +1,19 @@
 <div class="category-tree">
   @if (loading() && !filteredGroups().length) {
-    <p class="category-tree__status">Загрузка меню...</p>
+    <p class="category-tree__status">Завантаження меню...</p>
   }
 
   @if (error()) {
     <p class="category-tree__status category-tree__status--error">
-      Ошибка загрузки: {{ error() }}
+      Помилка завантаження: {{ error() }}
     </p>
   }
 
   @if (filteredGroups().length) {
     @for (group of filteredGroups(); track trackGroup($index, group)) {
-      <app-category-node [group]="group" />
+      <app-category-node [group]="group" [isCollapsed]="isCollapsed(group.name)()" (toggle)="toggleGroup($event)" />
     }
   } @else {
-    <p class="category-tree__status category-tree__status--empty">Нет блюд по заданному фильтру.</p>
+    <p class="category-tree__status category-tree__status--empty">Страви по заданому фільтру відсутні.</p>
   }
 </div>

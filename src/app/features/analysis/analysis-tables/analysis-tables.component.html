@@ -4,12 +4,14 @@
       <h3 class="analysis-table__title">{{ group.groupName }}</h3>
       <table class="table table-sm mb-0">
         <thead>
-          <tr>
-            <th>Блюдо</th>
-            <th class="text-center">Кол-во</th>
-            <th class="text-end">Цена</th>
-            <th class="text-end">Вес</th>
-          </tr>
+        <tr>
+          <th>Блюдо</th>
+          <th class="text-center">Кількість</th>
+          <th class="text-end">Ціна</th>
+          <th class="text-end">Вага</th>
+          <th class="text-end">Заг. Ціна</th>
+          <th class="text-end">Заг. Вага</th>
+        </tr>
         </thead>
         <tbody>
           @for (item of group.items; track item.name) {
@@ -17,11 +19,17 @@
               <td>{{ item.name }}</td>
               <td class="text-center">{{ item.quantity }}</td>
               <td class="text-end">{{ item.price }}</td>
+              <td class="text-end">{{ parsePrice(item.price) * item.quantity }}</td>
               <td class="text-end">{{ item.weight }}</td>
+              <td class="text-end">{{ parseWeight(item.weight) * item.quantity}}</td>
             </tr>
           }
         </tbody>
       </table>
     </section>
   }
+  <section>
+    Загальна ціна всьго меню: {{ menuStateService.totalPrice() }}
+    Загальна вага всьго меню: {{ menuStateService.totalWeight() }}
+  </section>
 </div>

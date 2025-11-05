@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn btn-outline-secondary btn-sm category-node__toggle"
-      (click)="toggleCollapsed()"
+      (click)="this.toggle.emit(this.group)"
       [attr.aria-label]="isCollapsed() ? 'Развернуть раздел' : 'Свернуть раздел'"
     >
       <i
