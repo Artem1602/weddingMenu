@@ -1,7 +1,8 @@
-import {Component, signal, ViewChild} from '@angular/core';
+import {Component, inject, signal, ViewChild} from '@angular/core';
 import {SearchInputComponent} from '../../../shared/controls/search-input/search-input.component';
 import {CategoryTreeComponent} from '../category-tree/category-tree.component';
 import {PanelCardComponent} from '../../../shared/ui/panel-card/panel-card.component';
+import {MenuApiService} from '../../../core/services/menu-api.service';
 
 @Component({
   selector: 'app-menu-navigation',
@@ -12,14 +13,14 @@ import {PanelCardComponent} from '../../../shared/ui/panel-card/panel-card.compo
 })
 export class MenuNavigationComponent {
   protected filter = signal('');
-  @ViewChild(CategoryTreeComponent) private tree?: CategoryTreeComponent;
+  public readonly menuApi = inject(MenuApiService);
 
   onExpandAll(): void {
-    this.tree?.triggerExpandAll();
+    this.menuApi.expandAll();
   }
 
   onCollapseAll(): void {
-    this.tree?.triggerCollapseAll();
+    this.menuApi.collapseAll();
   }
 
   protected onFilterChange(value: string): void {

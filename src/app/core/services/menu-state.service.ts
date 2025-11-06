@@ -15,7 +15,6 @@ export interface SelectedGroup {
 @Injectable({providedIn: 'root'})
 export class MenuStateService {
   private readonly _items = signal<SelectedMenuItem[]>([]);
-
   readonly items = this._items.asReadonly();
   readonly totalQuantity = computed(() =>
     this._items().reduce((total, item) => total + item.quantity, 0)

@@ -11,7 +11,7 @@
 
   @if (filteredGroups().length) {
     @for (group of filteredGroups(); track trackGroup($index, group)) {
-      <app-category-node [group]="group" [isCollapsed]="isCollapsed(group.name)()" (toggle)="toggleGroup($event)" />
+      <app-category-node [group]="group" [isCollapsed]="this.menuApi.isCollapsed(group.name)" />
     }
   } @else {
     <p class="category-tree__status category-tree__status--empty">Страви по заданому фільтру відсутні.</p>

@@ -1,8 +1,9 @@
-import {Component, input, Input, InputSignal, output, Signal, signal} from '@angular/core';
+import {Component, inject, input, Input, InputSignal, output, Signal, signal} from '@angular/core';
 import { MenuGroup, MenuItem } from '../../../../model/menu.models';
 import { QuantityStepperComponent } from '../../../../shared/controls/quantity-stepper/quantity-stepper.component';
 import { MenuStateService } from '../../../../core/services/menu-state.service';
 import { PanelCardComponent } from '../../../../shared/ui/panel-card/panel-card.component';
+import {MenuApiService} from '../../../../core/services/menu-api.service';
 
 @Component({
   selector: 'app-category-node',
@@ -14,7 +15,7 @@ import { PanelCardComponent } from '../../../../shared/ui/panel-card/panel-card.
 export class CategoryNodeComponent {
   @Input({ required: true }) group!: MenuGroup;
   public isCollapsed = input.required<boolean>();
-  public toggle = output<MenuGroup>()
+  public readonly menuApi = inject(MenuApiService);
 
   constructor(private readonly menuState: MenuStateService) {}
 

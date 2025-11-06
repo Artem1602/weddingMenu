@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import {WeddingMenu} from '../../model/menu.models';
+import {MenuItem, WeddingMenu} from '../../model/menu.models';
 
 @Injectable({ providedIn: 'root' })
 export class MenuApiService {
@@ -13,6 +13,32 @@ export class MenuApiService {
 
   readonly meta = computed(() => this._menu()?.meta ?? null);
   readonly groups = computed(() => this._menu()?.groups ?? []);
+
+  private readonly collapsedGroupsNames = signal(new Set<string>());
+
+  public isCollapsed(groupName: string): boolean {
+    return this.collapsedGroupsNames().has(groupName);
+  }
+
+  public toggleGroup(groupName: string): void {
+    this.collapsedGroupsNames.update((prev) => {
+      const next = new Set(prev);
+      if (next.has(groupName)) {
+        next.delete(groupName);
+      } else {
+        next.add(groupName);
+      }
+      return next;
+    });
+  }
+
+  public expandAll(): void {
+    this.collapsedGroupsNames.set(new Set());
+  }
+
+  public collapseAll(): void {
+    this.collapsedGroupsNames.set(new Set(this.groups().map((group) => group.name)));
+  }
 
   /**
    * Loads the wedding menu JSON from a public asset.
