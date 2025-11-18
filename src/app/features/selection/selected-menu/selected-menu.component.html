@@ -8,6 +8,20 @@
              Всього позицій =: {{ totalQuantity() }}
           </span>
         }
+        <input
+          #importInput
+          type="file"
+          accept="application/json"
+          class="visually-hidden"
+          (change)="onImportFile($event)"
+        />
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="importFromJSON()"
+        >
+          Імпортувати с JSON
+        </button>
         <button
           type="button"
           class="btn btn-outline-danger btn-sm selected-menu__clear"

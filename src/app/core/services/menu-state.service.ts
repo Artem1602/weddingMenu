@@ -95,6 +95,38 @@ export class MenuStateService {
     this._items.set([]);
   }
 
+  saveAsJson(): void {
+    const json = JSON.stringify(this._items(), null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'menu_state.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async loadFromJson(file: File): Promise<void> {
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      if (!Array.isArray(parsed)) {
+        throw new Error('Invalid menu state format');
+      }
+
+      const sanitized: SelectedMenuItem[] = parsed
+        .map((item: SelectedMenuItem) => ({
+          ...item,
+          quantity: Number.isFinite(item?.quantity) ? Math.max(1, Number(item.quantity)) : 1
+        }))
+        .filter((item) => !!item?.groupName && !!item?.name);
+
+      this._items.set(this.normalize(sanitized));
+    } catch (err) {
+      console.error('Failed to load menu state', err);
+    }
+  }
+
   private normalize(items: SelectedMenuItem[]): SelectedMenuItem[] {
     return items.sort((a, b) => {
       const byGroup = a.groupName.localeCompare(b.groupName);

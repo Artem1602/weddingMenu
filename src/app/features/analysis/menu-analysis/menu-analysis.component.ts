@@ -17,4 +17,9 @@ export class MenuAnalysisComponent {
   protected readonly totalQuantity = this.menuState.totalQuantity;
   protected readonly totalGroups = this.menuState.totalGroups;
   protected readonly hasSelection = computed(() => this.groupedItems().length > 0);
+  menuStateService = inject(MenuStateService);
+
+  protected onSaveAsJson() {
+    this.menuStateService.saveAsJson();
+  }
 }
