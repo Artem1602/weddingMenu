@@ -27,7 +27,7 @@ export class CategoryTreeComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.menuApi.load('/wedding_menu_full.json', false);
+    await this.menuApi.load('wedding_menu/wedding_menu_full.json', false);
     this.menuApi.collapseAll();
   }
 
