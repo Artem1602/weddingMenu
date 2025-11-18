@@ -52,7 +52,8 @@ export class MenuApiService {
       const fetchOptions: RequestInit = useCache
         ? { cache: 'force-cache' }
         : { cache: 'no-store' };
-      const res = await fetch(url, fetchOptions);
+      const resolvedUrl = new URL(url, document.baseURI).toString();
+      const res = await fetch(resolvedUrl, fetchOptions);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = (await res.json()) as WeddingMenu;
       this._menu.set(data);
