@@ -53,11 +53,17 @@ export class MenuApiService {
         ? { cache: 'force-cache' }
         : { cache: 'no-store' };
       const resolvedUrl = new URL(url, document.baseURI).toString();
+      console.info('[MenuApi] Loading menu from', resolvedUrl, fetchOptions);
       const res = await fetch(resolvedUrl, fetchOptions);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = (await res.json()) as WeddingMenu;
+      console.info('[MenuApi] Menu loaded successfully', {
+        groups: data.groups?.length ?? 0,
+        meta: data.meta ?? null
+      });
       this._menu.set(data);
     } catch (e: any) {
+      console.error('[MenuApi] Failed to load menu', e);
       this._error.set(e?.message ?? 'Failed to load menu');
       this._menu.set(null);
     } finally {
