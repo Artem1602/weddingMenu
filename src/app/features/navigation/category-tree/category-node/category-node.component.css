@@ -38,18 +38,25 @@
 .category-node__item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
+}
+
+.category-node__item app-quantity-stepper {
+  align-self: center;
 }
 
 .category-node__info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .category-node__name {
   font-weight: 600;
+  word-break: break-word;
 }
 
 .category-node__meta {

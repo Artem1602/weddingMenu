@@ -3,11 +3,6 @@
     <header appPanelCardHeader>
       <div class="selected-menu__header">
         <h2>Вибране меню</h2>
-        @if (hasItems()) {
-          <span class="selected-menu__counter">
-             Всього позицій =: {{ totalQuantity() }}
-          </span>
-        }
         <input
           #importInput
           type="file"
@@ -31,6 +26,11 @@
           Очистити вибір
         </button>
       </div>
+      @if (hasItems()) {
+        <span class="selected-menu__counter">
+             Всього позицій =: {{ totalQuantity() }}
+          </span>
+      }
     </header>
 
     @if (hasItems()) {

@@ -1,4 +1,4 @@
-<section class="menu-analysis">
+<section class="menu-analysis" #analysisContent>
   <app-panel-card>
     <header appPanelCardHeader>
       <div class="menu-analysis__header">
@@ -14,7 +14,7 @@
         <button type="button" class="btn btn-outline-secondary btn-sm" [disabled]="!hasSelection()" (click)="onSaveAsJson()">
           Зберегти
         </button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="!hasSelection()">
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="!hasSelection()" (click)="onSaveAsPdf()">
           Завантажити PDF
         </button>
       </div>
@@ -23,7 +23,7 @@
     @if (hasSelection()) {
       <app-analysis-tables [groups]="groupedItems()" />
     } @else {
-      <app-empty-state message="Выберите блюда, чтобы посмотреть анализ." />
+      <app-empty-state message="Виберіть стави для аналізу." />
     }
   </app-panel-card>
 </section>
