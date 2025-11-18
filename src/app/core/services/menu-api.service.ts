@@ -44,7 +44,7 @@ export class MenuApiService {
    * Loads the wedding menu JSON from a public asset.
    * Place the file at `/wedding_menu_full.json` (public root) or pass a custom URL.
    */
-  async load(url: string = 'wedding_menu_full.json', useCache = false): Promise<void> {
+  async load(url: string = 'assets/wedding_menu_full.json', useCache = false): Promise<void> {
     if (useCache && this._menu()) return; // cache: load once
     this._loading.set(true);
     this._error.set(null);
