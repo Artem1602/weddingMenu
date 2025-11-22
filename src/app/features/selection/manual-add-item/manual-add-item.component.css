@@ -1,0 +1,57 @@
+.manual-add {
+  margin-bottom: 1rem;
+}
+
+.manual-add__header {
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.manual-add__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.manual-add__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.manual-add__subtitle {
+  margin: 0.25rem 0 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.manual-add__form {
+  padding-top: 0.5rem;
+}
+
+.manual-add__quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.manual-add__quantity app-quantity-stepper {
+  width: 100%;
+}
+
+.manual-add__toggle {
+  margin-left: auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.manual-add__toggle i {
+  font-size: 1rem;
+  line-height: 1;
+}

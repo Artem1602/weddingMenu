@@ -38,7 +38,7 @@
         <section class="selected-menu__group">
           <h3 class="selected-menu__group-title">{{ group.groupName }}</h3>
           @for (item of group.items; track item.name) {
-            <app-selected-item-row [item]="item"/>
+            <app-selected-item-row [item]="item" />
           }
         </section>
       }
@@ -47,6 +47,11 @@
     }
   </app-panel-card>
 </section>
+
+<section class="manual-add-section">
+  <app-manual-add-item />
+</section>
+
 <section class="menu-shell__analysis">
   <app-menu-analysis />
 </section>

@@ -1,0 +1,80 @@
+﻿<app-panel-card class="manual-add">
+  <header appPanelCardHeader class="manual-add__header">
+    <div class="manual-add__info">
+      <h2 class="manual-add__title">Додати страву вручну</h2>
+      <p class="manual-add__subtitle">Вкажіть дані, якщо страви немає у списку</p>
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-sm manual-add__toggle"
+      (click)="toggleCollapsed()"
+      [attr.aria-label]="collapsed() ? 'Розгорнути форму' : 'Згорнути форму'"
+    >
+      <i
+        class="bi"
+        [class.bi-chevron-down]="!collapsed()"
+        [class.bi-chevron-right]="collapsed()"
+        aria-hidden="true"
+      ></i>
+    </button>
+  </header>
+
+  @if (!collapsed()) {
+    <form class="manual-add__form row g-3" (ngSubmit)="submit()">
+      <div class="col-12">
+        <label class="form-label" for="manual-name">Страва *</label>
+        <input
+          id="manual-name"
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="name"
+          required
+          placeholder="Наприклад, Асорті сирне"
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label class="form-label" for="manual-weight">Вага (г)</label>
+        <input
+          id="manual-weight"
+          type="text"
+          class="form-control"
+          name="weight"
+          [(ngModel)]="weight"
+          placeholder="250"
+        />
+      </div>
+
+      <div class="col-6 col-md-4">
+        <label class="form-label" for="manual-price">Ціна (грн)</label>
+        <input
+          id="manual-price"
+          type="text"
+          class="form-control"
+          name="price"
+          [(ngModel)]="price"
+          placeholder="120"
+        />
+      </div>
+
+      <div class="col-12 col-md-4 manual-add__quantity">
+        <label class="form-label" for="manual-quantity">Кількість</label>
+        <app-quantity-stepper
+          id="manual-quantity"
+          [value]="quantity"
+          [min]="1"
+          (increment)="incrementQuantity()"
+          (decrement)="decrementQuantity()"
+          (valueChange)="onQuantityChange($event)"
+        />
+      </div>
+
+      <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary" [disabled]="!canSubmit">
+          Додати до вибраного
+        </button>
+      </div>
+    </form>
+  }
+</app-panel-card>
